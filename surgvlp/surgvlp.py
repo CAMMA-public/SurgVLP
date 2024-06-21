@@ -7,7 +7,7 @@ from typing import Union, List
 
 from transformers import AutoTokenizer, AutoModel
 from typing import List, Dict, Any, Union
-from codes.models import build_algorithm
+from .codes.models import build_algorithm
 import torch
 
 from mmengine.config import Config

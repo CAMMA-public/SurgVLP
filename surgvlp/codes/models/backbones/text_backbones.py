@@ -4,8 +4,8 @@ from transformers import AutoModel, AutoTokenizer
 import re
 import torch.nn.functional as F
 import numpy as np
-from codes.models.backbones.text_basicblocks import Transformer, LayerNorm
-from codes.registry import MODELS
+from ..backbones.text_basicblocks import Transformer, LayerNorm
+from ...registry import MODELS
 
 @MODELS.register_module(name='text_backbones/BertEncoder')
 class BertEncoder(nn.Module):

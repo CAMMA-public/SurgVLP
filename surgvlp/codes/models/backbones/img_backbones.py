@@ -1,8 +1,8 @@
 import torch.nn as nn
 import torch as th
-from codes.models.utils import get_padding_shape
-from codes.models.backbones.resnets import resnet_dict
-from codes.registry import MODELS
+from ..utils import get_padding_shape
+from ..backbones.resnets import resnet_dict
+from ...registry import MODELS
 import torch
 from transformers import CLIPVisionModelWithProjection
 

@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch as th
-from codes.models.utils import get_padding_shape
+from ..utils import get_padding_shape
 
 class InceptionBlock(nn.Module):
 

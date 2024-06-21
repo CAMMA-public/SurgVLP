@@ -4,10 +4,9 @@ import torch.nn as nn
 import os
 import numpy as np
 import re
-import clip
-from codes.models.backbones.img_backbones import *
-from codes.models.backbones.text_backbones import *
-from codes.registry import MODELS
+from ..backbones.img_backbones import *
+from ..backbones.text_backbones import *
+from ...registry import MODELS
 
 @MODELS.register_module()
 class SurgVLP(nn.Module):

@@ -44,12 +44,6 @@ def resnet_50(pretrained='imagenet'):
     model.fc = Identity()
     return model, feature_dims, 1024
 
-import clip
-def resnet_50_CLIP(pretrained):
-    model, preprocess = clip.load("/gpfswork/rech/okw/ukw13bv/mmsl/pretrained_weights/RN50.pt", device='cpu')
-    visual = model.visual
-    return visual, 1024, 1024
-
 def resnet_101(pretrained=True):
     model = models_2d.resnet101(pretrained=pretrained)
     feature_dims = model.fc.in_features
@@ -61,7 +55,6 @@ resnet_dict = {
     'resnet_18': resnet_18,
     'resnet_34': resnet_34,
     'resnet_50': resnet_50,
-    'resnet_50_clip': resnet_50_CLIP,
     'resnet_101': resnet_101,
 }
 

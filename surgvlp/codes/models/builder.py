@@ -1,5 +1,5 @@
 # Copyright (c) OpenMMLab. All rights reserved.
-from codes.registry import MODELS
+from ..registry import MODELS
 
 ALGORITHMS = MODELS
 BACKBONES = MODELS
