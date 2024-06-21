@@ -5,3 +5,4 @@ tqdm
 mmengine==0.7.0
 torch
 torchvision
+numpy<2

@@ -96,15 +96,6 @@ class SurgVLP(nn.Module):
             feats_text_local, feats_text_global, sents = self.extract_feat_text(ids=input_ids, attn_mask=attention_masks, token_type=token_type_ids)
             
             return {'img_emb': feats_img, 'text_emb':feats_text_global}
-        elif mode == 'action':
-            feats_img = self.extract_feat_img(inputs_img)
 
-            feats_text_local, feats_text_global, sents = self.extract_feat_text(ids=input_ids, attn_mask=attention_masks, token_type=token_type_ids)
-            
-            return {'img_emb': feats_img, 'text_emb':feats_text_global}
-        elif mode == 'loss':
-            feats_img = self.extract_feat_img(inputs_img)
-            feats_text_local, feats_text_global, sents = self.extract_feat_text(ids=input_ids, attn_mask=attention_masks, token_type=token_type_ids)
-            return self.loss(feats_img, feats_text_global)
         else:
             raise RuntimeError(f'Invalid mode "{mode}".')
