@@ -1,0 +1,4 @@
+ftfy
+packaging
+regex
+tqdm
