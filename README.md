@@ -7,7 +7,7 @@ First, create a anaconda environment and [install PyTorch](https://pytorch.org/g
 ```bash
 $ pip install -r requirements.txt
 $ pip install ftfy regex tqdm
-$ pip install git+https://github.com/Flaick/SurgVLP_install.git
+$ pip install .
 ```
 
 ```python
