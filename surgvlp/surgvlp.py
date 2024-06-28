@@ -8,12 +8,13 @@ from typing import Union, List
 from transformers import AutoTokenizer, AutoModel
 from typing import List, Dict, Any, Union
 from .codes.models import build_algorithm
+from .codes.datasets import build_dataset
 import torch
 
 from mmengine.config import Config
 import torchvision.transforms as transforms
 
-__all__ = ["available_models", "load", "tokenize"]
+__all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
 
 _MODELS = {
@@ -135,3 +136,6 @@ def load(config_name: str,
 
     return model, _transform(input_size)
 
+def load_dataset(configs):
+    test_datasets = [build_dataset(c) for c in configs]
+    return test_datasets
