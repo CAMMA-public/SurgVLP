@@ -121,11 +121,10 @@ def _download(url: str, root: str):
 
     return download_target
 
-def load(config_name: str, 
+def load(model_config, 
         device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", 
         download_root: str = None):
         
-    model_config = Config.fromfile(config_name)['config']
     model_name = model_config['type']
     # model_path = _download(_MODELS[model_name], download_root or os.path.expanduser("~/.cache/surgvlp"))
 
