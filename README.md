@@ -14,11 +14,13 @@ $ pip install .
 import torch
 import surgvlp
 from PIL import Image
-
+from mmengine.config import Config
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model, preprocess = surgvlp.load('configs/model_config.py', device=device)
 
-image = preprocess(Image.open("SurgVLP.png")).unsqueeze(0).to(device)
+configs = Config.fromfile('./tests/config.py')['config']
+model, preprocess = surgvlp.load(configs.model_config, device=device)
+
+image = preprocess(Image.open("./tests/SurgVLP.png")).unsqueeze(0).to(device)
 text = surgvlp.tokenize(['This is preparation phase', 'This is clipcutting phase'], device=device)
 
 with torch.no_grad():
@@ -59,11 +61,11 @@ Returns a LongTensor containing tokenized sequences of given text input(s). This
 
 The model returned by `surgvlp.load()` supports the following methods:
 
-#### `model.encode_image(image: Tensor, text: None, mode='video')`
+#### `model(image: Tensor, text: None, mode='video')`
 
 Given a batch of images, returns the image features encoded by the vision portion of the SurgVLP model.
 
-#### `model.encode_text(image: None, text: Tensor, mode='text)`
+#### `model(image: None, text: Tensor, mode='text)`
 
 Given a batch of text tokens, returns the text features encoded by the language portion of the SurgVLP model.
 
