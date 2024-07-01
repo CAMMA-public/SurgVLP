@@ -221,7 +221,7 @@ if __name__ == "__main__":
     text_features /= text_features.norm(dim=-1, keepdim=True)
 
     # Load test dataloader
-    test_datasets = surgvlp.load_dataset(configs.dataset_config)
+    test_datasets = [surgvlp.load_dataset(c) for c in configs.dataset_config]
     test_loaders = [torch.utils.data.DataLoader(
         test_dataset,
         batch_size=args.batch_size,
