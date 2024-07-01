@@ -5,62 +5,18 @@ import clip
 from PIL import Image
 from mmengine.config import Config
 from transformers import AutoTokenizer
-from utils import calc_accuracy, calc_f1
 import torchmetrics
 import numpy as np
 import torchvision.transforms as transforms
 import surgvlp
-
-def process_text(text):
-    tokenizer_clinical = AutoTokenizer.from_pretrained('/gpfswork/rech/okw/ukw13bv/mmsl/biobert_pretrain_output_all_notes_150000')
-    ixtoword = {v: k for k, v in tokenizer_clinical.get_vocab().items()}
-    if type(text) == str:
-        text = [text]
-
-    processed_text_tensors = []
-    for t in text:
-
-        text_tensors = tokenizer_clinical(
-            t,
-            return_tensors="pt",
-            truncation=True,
-            padding="max_length",
-            max_length=77,
-        )
-        text_tensors["sent"] = [
-            ixtoword[ix] for ix in text_tensors["input_ids"][0].tolist()
-        ]
-        processed_text_tensors.append(text_tensors)
-
-    caption_ids = torch.stack([x["input_ids"] for x in processed_text_tensors])
-    attention_mask = torch.stack(
-        [x["attention_mask"] for x in processed_text_tensors]
-    )
-    token_type_ids = torch.stack(
-        [x["token_type_ids"] for x in processed_text_tensors]
-    )
-
-    if len(text) == 1:
-        caption_ids = caption_ids.squeeze(0).cuda()
-        attention_mask = attention_mask.squeeze(0).cuda()#.to(device)
-        token_type_ids = token_type_ids.squeeze(0).cuda()
-    else:
-        caption_ids = caption_ids.squeeze().cuda()
-        attention_mask = attention_mask.squeeze().cuda()
-        token_type_ids = token_type_ids.squeeze().cuda()
-
-    cap_lens = []
-    for txt in text:
-        cap_lens.append(len([w for w in txt if not w.startswith("[")]))
-
-    return {
-        "input_ids": caption_ids,
-        "attention_mask": attention_mask,
-        "token_type_ids": token_type_ids,
-        "cap_lens": cap_lens,
-    }
-
 import matplotlib.pyplot as plt
+from utils import calc_accuracy, calc_f1
+
+import logging
+
+# Configure logging
+logging.basicConfig(filename='results.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 def save_fig(img_pil, probs, prompts, classes, save_path, title):
     """
     Plots the classification results with the given class labels and probabilities alongside the original image,
@@ -150,38 +106,24 @@ def unnormalize(tensor: torch.Tensor, mean: list, std: list) -> torch.Tensor:
     return tensor_unnormalized
 
 
-def main(test_loader, model, args):
-    class_prompt=args.class_prompt
-
+def test(test_loader, model, args):
     model.eval()
-
-    with open(class_prompt) as f:
-        lines = f.readlines()
-    f.close()
-
-    class_texts_ = [i.replace('\n', '') for i in lines]
-    class_texts = process_text(class_texts_)
-    text_features = model(None, class_texts, mode='text')['text_emb'].cuda()
-    text_features /= text_features.norm(dim=-1, keepdim=True)
-
 
     total_acc = []
     total_f1_phase = []
     total_f1_phase_class = []
 
     with torch.no_grad():
-        for test_loader in test_loaders:
+        for vid_idx, test_loader in enumerate(test_loaders):
             probs_list = []
             label_list = []
 
             for i, data in enumerate(test_loader): 
                 frames = data['video'].cuda() # (1, M, T, C, H, W)
-                # B, M, T, C, H, W = frames.shape
                 B, C, H, W = frames.shape
 
                 frames = frames.view(-1, C, H, W)
                 image_features = model(frames, None, mode='video')['img_emb'] # (B*M*T, D)
-                # image_features = torch.mean(image_features, dim=0, keepdim=True) # (1, D)
                 image_features /= image_features.norm(dim=-1, keepdim=True)
 
                 probs = (100.0 * image_features @ text_features.T).softmax(dim=-1) # (1, classes)
@@ -191,16 +133,15 @@ def main(test_loader, model, args):
                 label_list.append(labels)
 
                 ### save figure
-
                 if args.save_plot:
                     phase_labels = [
                         'Preparation',
-                        'Dividing ligament and peritoneum',
-                        'Dividing uterine vessels and ligament',
-                        'Transecting the vagina',
-                        'Specimen removal',
-                        'Suturing',
-                        'Washing'
+                        'Calottriangle Dissecrion',
+                        'Clipping Cutting',
+                        'Gallbladder Dissection',
+                        'Gallbladder Packing',
+                        'Cleaning Coagulation',
+                        'Gallbladder Removal'
                     ]
 
                     prompts = [
@@ -225,67 +166,26 @@ def main(test_loader, model, args):
                     img_pil = tensor_to_plt_image(frame_unnormalize)
                     probs = (probs[0]* 100).tolist() 
 
-                    save_fig(img_pil, probs, prompts, phase_labels, './qualitative/'+str(i)+'_autolapa.png', 'GT: {} | Prediction: {}'.format(gt, prediction))
+                    save_fig(img_pil, probs, prompts, phase_labels, './qualitative/'+str(i)+'.png', 'GT: {} | Prediction: {}'.format(gt, prediction))
 
                     if i == 1500: exit()
 
-            #
             probs_list = torch.cat(probs_list, 0)
             labels = torch.cat(label_list, 0)
             
             acc = calc_accuracy(probs_list, labels)
-            print('accuracy: ', acc)
+
+            ## The video id logged here starts from 0, does not map to the real video id in dataset. 
+            ## Here the video id is just for logging purpose
+            logging.info('Video #%d Accuracy: %f', vid_idx, acc)
             f1_class, f1_average = calc_f1(probs_list, labels)
-            print('f1 average: ', f1_average)
-            print('f1 classes: ', f1_class)
+            logging.info('Video #%d F1 average: %f', vid_idx, f1_average)
+            logging.info('Video #%d F1 classes: %s', vid_idx, np.array2string(f1_class))
 
             total_acc.append(acc)
             total_f1_phase.append(f1_average)
-        print('f1 phase video-wise average ', np.mean(np.asarray(total_f1_phase)))
-        print('Acc video-wise average ', np.mean(np.asarray(total_acc)))
-
-
-
-def linear_evaluation(
-    train_loader: torch.utils.data.DataLoader,
-    val_loader: torch.utils.data.DataLoader,
-    model: torch.nn.Module,
-    num_classes: int
-) -> torch.nn.Module:
-    # Freeze the pre-trained model's parameters
-    for param in model.parameters():
-        param.requires_grad = False
-    
-    # Create a linear classifier
-    classifier = nn.Linear(1024, num_classes).cuda()
-    criterion = nn.CrossEntropyLoss().cuda()
-    optimizer = torch.optim.Adam(classifier.parameters())
-
-    # Training loop
-    model.eval()  # Ensure the model is in evaluation mode
-    for epoch in range(1):
-        for batch in train_loader:
-            inputs = batch['video'].cuda()
-            labels = batch['label'].cuda()
-
-            # Forward pass through the pre-trained model to get features
-            with torch.no_grad():
-                features = model.encode_image(inputs)
-
-            features = features.to(dtype=torch.float32)
-            # Forward pass through the classifier
-            outputs = classifier(features)
-            loss = criterion(outputs, labels)
-            print(loss)
-
-            # Backward and optimize
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-        
-        # Validation can be added here if needed
-
-    return classifier  # Return the trained classifier
+        logging.info('F1 phase video-wise average : %f', np.mean(np.asarray(total_f1_phase)))
+        logging.info('Acc video-wise average: %f', np.mean(np.asarray(total_acc)))
 
 
 def get_args(description='SurgVLP'):
@@ -297,8 +197,8 @@ def get_args(description='SurgVLP'):
     args = parser.parse_args()
     return args, parser
 
-import torch.distributed as dist
 if __name__ == "__main__":
+    logging.info('Start of new round of evaluation.')
 
     args, _ = get_args()
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -306,21 +206,22 @@ if __name__ == "__main__":
 
     if args.save_plot: args.batch_size = 1
 
-    model = surgvlp.load(configs.model_config)
+    model, _ = surgvlp.load(configs.model_config)
+    model = model.to(device)
+    model.eval()
 
+    # Tokenize the class prompts
+    with open(args.class_prompt) as f:
+        lines = f.readlines()
+    f.close()
 
-    # state_dict = torch.load('/gpfswork/rech/okw/ukw13bv/mmsl/configs/Hierarchy_SurgVLP_test_5/epoch0160_archive.pth.tar')['state_dict']
+    class_texts = [i.replace('\n', '') for i in lines]
+    class_tokens = surgvlp.tokenize(class_texts, device=device)
+    text_features = model(None, class_tokens, mode='text')['text_emb'].cuda()
+    text_features /= text_features.norm(dim=-1, keepdim=True)
 
-    # new_dict = {}
-    # for k, v in state_dict.items():
-    #     if 'module.' in k:
-    #         new_dict[k[7:].replace('visual.model.', 'backbone_img.model.').replace('text_module.model.', 'backbone_text.model.').replace('visual.global_embedder','backbone_img.global_embedder')] = v
-
-    # a, b = model.load_state_dict(new_dict, strict=True)
-    # model.eval()
-
+    # Load test dataloader
     test_datasets = surgvlp.load_dataset(configs.dataset_config)
-
     test_loaders = [torch.utils.data.DataLoader(
         test_dataset,
         batch_size=args.batch_size,
@@ -330,5 +231,4 @@ if __name__ == "__main__":
     ) for test_dataset in test_datasets]
     print(args)
 
-    main(test_loaders, model, args)
-
+    test(test_loaders, model, args)

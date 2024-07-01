@@ -5,9 +5,9 @@ config = dict(
     dataset_config=[
     dict(
     type='Recognition_frame',
-    csv_root='/gpfswork/rech/okw/ukw13bv/mmsl/csv/cholec80/csvs',
+    csv_root='./csvs',
     vid='video%02d.csv'%i,
-    video_root='/gpfsscratch/rech/okw/ukw13bv/cholec80/frames_output',
+    video_root='./tmp/tmp',
     transforms=transforms.Compose(
         [
         transforms.Resize((360, 640)),
@@ -16,22 +16,20 @@ config = dict(
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ]
         ),
-    ) for i in range(49, 81)
+    ) for i in range(49, 50) # 81
     ],
     model_config = dict(
-        type='MVNet',
+        type='SurgVLP',
         backbone_img = dict(
             type='img_backbones/ImageEncoder',
-            # type='img_backbones/ImageEncoder_CLIPVISUAL',
             num_classes=768,
-            pretrained='imagenet', # imagenet/ssl/random
-            backbone_name='resnet_50', 
-            # backbone_name='resnet_50_clip' 
-            img_norm=False,
+            pretrained='imagenet',
+            backbone_name='resnet_50',
+            img_norm=False
         ),
         backbone_text= dict(
             type='text_backbones/BertEncoder',
-            text_bert_type='/gpfswork/rech/okw/ukw13bv/mmsl/biobert_pretrain_output_all_notes_150000',
+            text_bert_type='emilyalsentzer/Bio_ClinicalBERT',
             text_last_n_layers=4,
             text_aggregate_method='sum',
             text_norm=False,
