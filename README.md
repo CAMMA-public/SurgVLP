@@ -23,8 +23,7 @@ SurgVLP (Surgical Vision Language Pre-training) is a neural network pretrained o
 First, create a anaconda environment and [install PyTorch](https://pytorch.org/get-started/locally/) (or later) and torchvision, as well as small additional dependencies, and then install this repo as a Python package. On a CUDA GPU machine, the following will do the trick:
 
 ```bash
-$ pip install -r requirements.txt
-$ pip install ftfy regex tqdm
+$ pip install git+https://github.com/openai/CLIP.git
 $ pip install .
 ```
 
