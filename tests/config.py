@@ -21,7 +21,7 @@ config = dict(
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
         ]
         ),
-    ) for i in range(49, 50) # 81
+    ) for i in range(49, 81)
     ],
     model_config = dict(
         type='SurgVLP',

@@ -98,20 +98,22 @@ Given a batch of images and a batch of text tokens, returns the image and textua
 
 ### Zero-Shot Surgical Phase Recognition
 
-The code below performs zero-shot phase recognition using SurgVLP. This example takes an image from the Cholec80 dataset testing set, and predicts the most likely phase labels from the dataset. To start with, you need to download the Cholec80 dataset from the offical [website](https://camma.unistra.fr/datasets/) and extract frames. We **recommend** you to download our processed frames and csv files under this [link](). 
+The code below performs zero-shot phase recognition using SurgVLP. This example takes an image from the Cholec80 dataset testing set, and predicts the most likely phase labels from the dataset. To start with, you need to download the Cholec80 dataset from the offical [website](https://camma.unistra.fr/datasets/) and extract frames. We **recommend** you to download our processed [frames](https://seafile.unistra.fr/f/7d29ecf9ff9d4bad8a0f/?dl=1) and [csv](https://seafile.unistra.fr/f/11a4f6309d8b428f8357/?dl=1) files. 
 
 #### Step 1
 Download cholec80 testing set from our S3 server and unzip it into **./tests** folder:
 ```bash
-$ wget ....zip
-$ unzip ...zip -d ./tests/
+$ wget https://seafile.unistra.fr/seafhttp/files/42516057-9d54-4bdf-a19a-9ff278b7ef4c/csvs.zip
+$ wget https://seafile.unistra.fr/seafhttp/files/60f4d277-e3d6-429a-9dfb-54852c328c8b/cholec80_test_frames.zip
+$ unzip csvs.zip -d ./tests/
+$ unzip cholec80_test_frames.zip -d ./tests/
 ```
 #### Step 2
 Edit the configuration file located at **./tests/config.py** with the your own values:
 
 ```python
-csv_root='./csvs' # your value,
-video_root='./tmp/' # your value,
+csv_root='./csvs' # replace with your own value,
+video_root='./tmp/' # replace with your own value,
 ```
 
 #### Step 3 
