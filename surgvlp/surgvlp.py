@@ -13,6 +13,7 @@ import torch
 
 from mmengine.config import Config
 import torchvision.transforms as transforms
+import tqdm
 
 __all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
