@@ -19,7 +19,7 @@ __all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
 
 _MODELS = {
-    "SurgVLP": "https://seafile.unistra.fr/f/41e04b9e66c346a698ab/?dl=1",
+    "SurgVLP": "https://seafile.unistra.fr/seafhttp/files/0d8e0768-159f-4d05-b547-fa086bf7338d/surgvlp.pth",
 } 
 
 _INPUT_RES = {
@@ -102,10 +102,7 @@ def _download(url: str, root: str):
         raise RuntimeError(f"{download_target} exists and is not a regular file")
 
     if os.path.isfile(download_target):
-        if hashlib.sha256(open(download_target, "rb").read()).hexdigest() == expected_sha256:
-            return download_target
-        else:
-            warnings.warn(f"{download_target} exists, but the SHA256 checksum does not match; re-downloading the file")
+        return download_target
 
     with urllib.request.urlopen(url) as source, open(download_target, "wb") as output:
         with tqdm(total=int(source.info().get("Content-Length")), ncols=80, unit='iB', unit_scale=True, unit_divisor=1024) as loop:
@@ -117,9 +114,6 @@ def _download(url: str, root: str):
                 output.write(buffer)
                 loop.update(len(buffer))
 
-    if hashlib.sha256(open(download_target, "rb").read()).hexdigest() != expected_sha256:
-        raise RuntimeError("Model has been downloaded but the SHA256 checksum does not not match")
-
     return download_target
 
 def load(model_config, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", download_root: str = None):
@@ -130,7 +124,8 @@ def load(model_config, device: Union[str, torch.device] = "cuda" if torch.cuda.i
     input_size = _INPUT_RES[model_name]
 
     model = build_algorithm(model_config).to(device)
-    model.load_state_dict(torch.load(model_path)).eval()
+    model.load_state_dict(torch.load(model_path))
+    model = model.eval()
 
     return model, _transform(input_size)
 
