@@ -20,8 +20,6 @@ def calc_f1(preds: torch.Tensor, labels: torch.Tensor) -> float:
     labels_pred = torch.argmax(preds, dim=1).cpu().numpy()
     labels = labels.cpu().numpy()
     cm = ConfusionMatrix(actual_vector=labels, predict_vector=labels_pred)
-    print(cm.Overall_ACC, cm.PPV, cm.TPR, cm.classes, cm.F1_Macro)
     f1 = f1_score(labels, labels_pred, average=None)
     f1_average = f1_score(labels, labels_pred, average='macro')
-    print(f1_average)
     return f1, f1_average
