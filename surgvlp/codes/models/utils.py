@@ -1,3 +1,8 @@
+"""
+Project: Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures
+-----
+Copyright (c) University of Strasbourg, All Rights Reserved.
+"""
 def get_padding_shape(filter_shape, stride):
     def _pad_top_bottom(filter_dim, stride_val):
         pad_along = max(filter_dim - stride_val, 0)
