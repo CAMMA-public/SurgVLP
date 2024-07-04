@@ -192,7 +192,7 @@ def get_args(description='SurgVLP'):
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('--class_prompt', default='./class_prompt.txt', type=str, help='prompt for categories')
     parser.add_argument('--save_plot', default=False, type=bool, help='save plot or not')
-    parser.add_argument('--dataset_config', default='./config.py', type=str, help='dataset config')
+    parser.add_argument('--config', default='./config.py', type=str, help='dataset config')
     parser.add_argument('--batch_size', default=400, type=int, help='batch for testing')
     args = parser.parse_args()
     return args, parser
@@ -202,7 +202,7 @@ if __name__ == "__main__":
 
     args, _ = get_args()
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    configs = Config.fromfile(args.dataset_config)['config']
+    configs = Config.fromfile(args.config)['config']
 
     if args.save_plot: args.batch_size = 1
 

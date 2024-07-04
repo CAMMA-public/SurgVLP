@@ -1,12 +1,16 @@
+"""
+Project: Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures
+-----
+Copyright (c) University of Strasbourg, All Rights Reserved.
+"""
 import os
-
 import pkg_resources
 from setuptools import setup, find_packages
 
 setup(
     name="surgvlp",
     py_modules=["surgvlp"],
-    version="1.0",
+    version="0.1.0",
     description="",
     author="CAMMA",
     packages=find_packages(exclude=["tests*"]),
