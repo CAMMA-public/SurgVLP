@@ -1,3 +1,8 @@
+"""
+Project: Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures
+-----
+Copyright (c) University of Strasbourg, All Rights Reserved.
+"""
 import torch.nn as nn
 import argparse
 import torch
