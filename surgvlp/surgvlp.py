@@ -20,6 +20,7 @@ from mmengine.config import Config
 import torchvision.transforms as transforms
 from tqdm import tqdm
 import subprocess
+import zipfile
 
 __all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
@@ -97,10 +98,11 @@ def tokenize(
         "cap_lens": cap_lens,
     }
 
-def _download(models: dict, key: str, root: str) -> str:
+
+def _download(models: Dict[str, str], key: str, root: str) -> str:
     url = models[key]
     os.makedirs(root, exist_ok=True)
-    filename = key+'.pth'
+    filename = key + '.pth'
     
     download_target = os.path.join(root, filename)
     
@@ -108,6 +110,9 @@ def _download(models: dict, key: str, root: str) -> str:
         raise RuntimeError(f"{download_target} exists and is not a regular file")
     
     if os.path.isfile(download_target):
+        if zipfile.is_zipfile(download_target):
+            with zipfile.ZipFile(download_target, 'r') as zip_ref:
+                zip_ref.extractall(root)
         return download_target
     
     # Using wget to download the file with --content-disposition
@@ -117,6 +122,11 @@ def _download(models: dict, key: str, root: str) -> str:
     
     if result.returncode != 0:
         raise RuntimeError(f"Failed to download file: {result.stderr}")
+    
+    # Check if the downloaded file is a zip file and unzip it
+    if zipfile.is_zipfile(download_target):
+        with zipfile.ZipFile(download_target, 'r') as zip_ref:
+            zip_ref.extractall(root)
     
     return download_target
 
