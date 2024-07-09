@@ -25,11 +25,11 @@ __all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
 
 _MODELS = {
-    "surgvlp": "https://seafile.unistra.fr/f/41e04b9e66c346a698ab/?dl=1",
+    "SurgVLP": "https://seafile.unistra.fr/f/41e04b9e66c346a698ab/?dl=1",
 } 
 
 _INPUT_RES = {
-    "surgvlp": 224,
+    "SurgVLP": 224,
 } 
 
 def available_models() -> List[str]:
