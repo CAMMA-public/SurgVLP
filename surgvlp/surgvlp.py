@@ -25,11 +25,11 @@ __all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
 
 _MODELS = {
-    "SurgVLP": "https://seafile.unistra.fr/f/41e04b9e66c346a698ab/?dl=1",
+    "surgvlp": "https://seafile.unistra.fr/f/41e04b9e66c346a698ab/?dl=1",
 } 
 
 _INPUT_RES = {
-    "SurgVLP": 224,
+    "surgvlp": 224,
 } 
 
 def available_models() -> List[str]:
@@ -97,9 +97,10 @@ def tokenize(
         "cap_lens": cap_lens,
     }
 
-def _download(url: str, root: str) -> str:
+def _download(models: dict, key: str, root: str) -> str:
+    url = models[key]
     os.makedirs(root, exist_ok=True)
-    filename = os.path.basename(url)
+    filename = key+'.pth'
     
     download_target = os.path.join(root, filename)
     
@@ -122,7 +123,7 @@ def _download(url: str, root: str) -> str:
 def load(model_config, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", download_root: str = None):
         
     model_name = model_config['type']
-    model_path = _download(_MODELS[model_name], download_root or os.path.expanduser("~/.cache/surgvlp"))
+    model_path = _download(_MODELS, model_name, download_root or os.path.expanduser("~/.cache/surgvlp"))
 
     input_size = _INPUT_RES[model_name]
 
