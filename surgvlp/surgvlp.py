@@ -97,7 +97,7 @@ def tokenize(
         "cap_lens": cap_lens,
     }
 
-def download_file(url: str, root: str) -> str:
+def _download(url: str, root: str) -> str:
     os.makedirs(root, exist_ok=True)
     filename = os.path.basename(url)
     
