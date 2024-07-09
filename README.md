@@ -103,8 +103,8 @@ The code below performs zero-shot phase recognition using SurgVLP. This example 
 #### Step 1
 Download cholec80 testing set from our S3 server and unzip it into **./tests** folder:
 ```bash
-$ wget https://seafile.unistra.fr/seafhttp/files/42516057-9d54-4bdf-a19a-9ff278b7ef4c/csvs.zip
-$ wget https://seafile.unistra.fr/seafhttp/files/60f4d277-e3d6-429a-9dfb-54852c328c8b/cholec80_test_frames.zip
+$ wget --content-disposition https://seafile.unistra.fr/f/11a4f6309d8b428f8357/?dl=1
+$ wget --content-disposition https://seafile.unistra.fr/f/7d29ecf9ff9d4bad8a0f/?dl=1
 $ unzip csvs.zip -d ./tests/
 $ unzip cholec80_test_frames.zip -d ./tests/
 ```
@@ -124,7 +124,7 @@ $ python zero_shot.py --save_plot=False --class_prompt=./class_prompt.txt --data
 ```
 
 ## Citing SurgVLP   
-Please cite this work if you find its interesting and useful:
+Please cite this work if you find it interesting and useful:
 ```bibtex
 @article{yuan2023learning,
   title={Learning multi-modal representations by watching hundreds of surgical video lectures},
