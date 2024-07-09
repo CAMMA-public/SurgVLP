@@ -102,7 +102,7 @@ def tokenize(
 def _download(models: Dict[str, str], key: str, root: str) -> str:
     url = models[key]
     os.makedirs(root, exist_ok=True)
-    filename = key + '.pth'
+    filename = key + '.zip'
     
     download_target = os.path.join(root, filename)
     
@@ -113,8 +113,8 @@ def _download(models: Dict[str, str], key: str, root: str) -> str:
         if zipfile.is_zipfile(download_target):
             with zipfile.ZipFile(download_target, 'r') as zip_ref:
                 zip_ref.extractall(root)
-        return download_target
-    
+        return download_target.replace('.zip', '.pth')
+        
     # Using wget to download the file with --content-disposition
     command = ['wget', '--content-disposition', '-P', root, url]
     
@@ -128,7 +128,7 @@ def _download(models: Dict[str, str], key: str, root: str) -> str:
         with zipfile.ZipFile(download_target, 'r') as zip_ref:
             zip_ref.extractall(root)
     
-    return download_target
+    return download_target.replace('.zip', '.pth')
 
 def load(model_config, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", download_root: str = None):
         
