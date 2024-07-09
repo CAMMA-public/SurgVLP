@@ -19,12 +19,13 @@ import torch
 from mmengine.config import Config
 import torchvision.transforms as transforms
 from tqdm import tqdm
+import subprocess
 
 __all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
 
 _MODELS = {
-    "SurgVLP": "https://seafile.unistra.fr/seafhttp/files/0d8e0768-159f-4d05-b547-fa086bf7338d/surgvlp.pth",
+    "SurgVLP": "https://seafile.unistra.fr/f/41e04b9e66c346a698ab/?dl=1",
 } 
 
 _INPUT_RES = {
@@ -96,29 +97,26 @@ def tokenize(
         "cap_lens": cap_lens,
     }
 
-def _download(url: str, root: str):
+def download_file(url: str, root: str) -> str:
     os.makedirs(root, exist_ok=True)
     filename = os.path.basename(url)
-
-    expected_sha256 = url.split("/")[-2]
+    
     download_target = os.path.join(root, filename)
-
+    
     if os.path.exists(download_target) and not os.path.isfile(download_target):
         raise RuntimeError(f"{download_target} exists and is not a regular file")
-
+    
     if os.path.isfile(download_target):
         return download_target
-
-    with urllib.request.urlopen(url) as source, open(download_target, "wb") as output:
-        with tqdm(total=int(source.info().get("Content-Length")), ncols=80, unit='iB', unit_scale=True, unit_divisor=1024) as loop:
-            while True:
-                buffer = source.read(8192)
-                if not buffer:
-                    break
-
-                output.write(buffer)
-                loop.update(len(buffer))
-
+    
+    # Using wget to download the file with --content-disposition
+    command = ['wget', '--content-disposition', '-P', root, url]
+    
+    result = subprocess.run(command, capture_output=True, text=True)
+    
+    if result.returncode != 0:
+        raise RuntimeError(f"Failed to download file: {result.stderr}")
+    
     return download_target
 
 def load(model_config, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", download_root: str = None):
