@@ -25,7 +25,7 @@ __all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
 
 _MODELS = {
-    "SurgVLP": "https://seafile.unistra.fr/f/41e04b9e66c346a698ab/?dl=1",
+    "SurgVLP": "https://seafile.unistra.fr/f/93757ace1bfc47248e1e/?dl=1",
 } 
 
 _INPUT_RES = {
