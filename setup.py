@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 setup(
     name="surgvlp",
     py_modules=["surgvlp"],
-    version="0.1.0",
+    version="0.1.1",
     description="",
     author="CAMMA",
     packages=find_packages(exclude=["tests*"]),
