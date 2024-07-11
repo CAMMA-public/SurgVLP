@@ -120,7 +120,7 @@ video_root='./tmp/' # replace with your own value,
 Run the **tests/zero_shot.py** to conduct zero-shot surgical phase recognition of cholec80 testing set:
 ```bash
 $ cd tests
-$ python zero_shot.py --save_plot=False --class_prompt=./class_prompt.txt --dataset_config --config=./config.py --batch_size=400
+$ python zero_shot.py --save_plot=False --class_prompt=./class_prompt.txt --config --config=./config.py --batch_size=400
 ```
 
 ## Citing SurgVLP   
