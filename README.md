@@ -6,7 +6,7 @@
 
 # Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures
 
-[[Blog]](https://zhuanlan.zhihu.com/p/650509382) [[Paper]](https://arxiv.org/pdf/2307.15220) 
+[[Paper]](https://arxiv.org/pdf/2307.15220) 
 
 SurgVLP (Surgical Vision Language Pre-training) is a neural network pretrained on large-scale (image, text) pairs from surgical video lectures. It uses automatic speech recognition to generate text transcriptions, addressing the unique linguistic challenges of surgical language and creating an SVL (Surgical Vision-Language Pretraining) dataset. SurgVLP aligns video clip embeddings with corresponding text embeddings in a joint latent space through a contrastive learning objective. Without manual annotations, SurgVLP excels in vision-language tasks like text-based video retrieval, temporal activity grounding, and video captioning. It also demonstrates zero-shot applicability to conventional surgical computer vision tasks, such as phase recognition, without any task-specific finetuning.
 
