@@ -24,7 +24,7 @@ First, create a anaconda environment and [install PyTorch](https://pytorch.org/g
 
 ```bash
 $ pip install git+https://github.com/openai/CLIP.git
-$ pip install .
+$ pip install git+https://github.com/CAMMA-public/SurgVLP.git
 ```
 
 ```python
