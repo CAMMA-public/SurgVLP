@@ -127,9 +127,11 @@ $ python zero_shot.py --save_plot=False --class_prompt=./class_prompt.txt --conf
 Please cite this work if you find it interesting and useful:
 ```bibtex
 @article{yuan2023learning,
-  title={Learning multi-modal representations by watching hundreds of surgical video lectures},
+  title={Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures},
   author={Yuan, Kun and Srivastav, Vinkle and Yu, Tong and Lavanchy, Joel and Mascagni, Pietro and Navab, Nassir and Padoy, Nicolas},
-  year={2023}
+  year={2023},
+  eprint={2307.15220},
+  archivePrefix={arXiv}
 }
 ```
 [[`Download PDF`](https://arxiv.org/pdf/2307.15220.pdf)]
