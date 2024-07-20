@@ -141,6 +141,6 @@ Please cite this work if you find it interesting and useful:
 ## License
 This code, models, and datasets are available for non-commercial scientific research purposes as defined in the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). By downloading and using this code you agree to the terms in the [LICENSE](LICENSE). Third-party codes are subject to their respective licenses.
 
-By downloading and using this repo or dataset, you agree on these terms and conditions.
+By downloading and using this repo, you agree on these terms and conditions.
 
 
