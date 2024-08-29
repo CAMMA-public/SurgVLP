@@ -143,4 +143,10 @@ This code, models, and datasets are available for non-commercial scientific rese
 
 By downloading and using this repo, you agree on these terms and conditions.
 
+## Acknowledgement
+This work has received funding from the European Union
+(ERC, CompSURG, 101088553). Views and opinions expressed are however those of the authors only and do not
+necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor
+the granting authority can be held responsible for them. This work was also partially supported by French state funds
+managed by the ANR under Grants ANR-20-CHIA-0029-01 and ANR-10-IAHU-02.
 
