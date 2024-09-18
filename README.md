@@ -50,7 +50,7 @@ with torch.no_grad():
     image_embeddings /= image_embeddings.norm(dim=-1, keepdim=True)
     text_embeddings /= text_embeddings.norm(dim=-1, keepdim=True)
 
-    logits_per_image = (100.0 * image_embeddings @ text_embeddings.T).softmax(dim=-1)
+    logits_per_image = 100.0 * image_embeddings @ text_embeddings.T
     probs = logits_per_image.softmax(dim=-1).cpu().numpy()
 
 print("Label probs:", probs)
