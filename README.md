@@ -15,6 +15,8 @@ SurgVLP (Surgical Vision Language Pre-training) is a neural network pretrained o
 - SurgVLP weights trained on the SVL dataset.
 - Evaluation code for zero-shot recognition on surgical phases on the Cholec-80 dataset.
 
+
+
 ## Surgical Vision-Language Pretraining Dataset (SVL)
 
 ![SVL](./tests/SVL.png)
