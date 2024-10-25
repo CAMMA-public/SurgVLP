@@ -9,7 +9,11 @@ _Kun Yuan, Vinkle Srivastav, Tong Yu, Joel L. Lavanchy, Pietro Mascagni, Nassir 
 
 [![arXiv](https://img.shields.io/badge/arxiv-2307.15220-red)](https://arxiv.org/abs/2307.15220) 
 
-SurgVLP (Surgical Vision Language Pre-training) is a neural network pretrained on large-scale (image, text) pairs from surgical video lectures. It uses automatic speech recognition to generate text transcriptions, addressing the unique linguistic challenges of surgical language and creating an SVL (Surgical Vision-Language Pretraining) dataset. SurgVLP aligns video clip embeddings with corresponding text embeddings in a joint latent space through a contrastive learning objective. Without manual annotations, SurgVLP excels in vision-language tasks like text-based video retrieval, temporal activity grounding, and video captioning. It also demonstrates zero-shot applicability to conventional surgical computer vision tasks, such as phase recognition, without any task-specific finetuning.
+SurgVLP (Surgical Vision Language Pre-training) is a neural network pretrained on large-scale (image, text) pairs from surgical video lectures. It uses automatic speech recognition to generate text transcriptions, addressing the unique linguistic challenges of surgical language and creating an SVL (Surgical Vision-Language Pretraining) dataset. SurgVLP aligns video clip embeddings with corresponding text embeddings in a joint latent space through a contrastive learning objective. Without manual annotations, SurgVLP excels in vision-language tasks like text-based video retrieval, temporal activity grounding, and video captioning. It also demonstrates zero-shot applicability to conventional surgical computer vision tasks, such as phase recognition, without task-specific fine-tuning.
+
+#### In this repo we provide:
+- SurgVLP weights trained on the SVL dataset.
+- Evaluation code for zero-shot recognition on surgical phases on the Cholec-80 dataset.
 
 ## Surgical Vision-Language Pretraining Dataset (SVL)
 
@@ -139,9 +143,9 @@ Please cite this work if you find it interesting and useful:
 
 
 ## License
-This code, models, and datasets are available for non-commercial scientific research purposes as defined in the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). By downloading and using this code you agree to the terms in the [LICENSE](LICENSE). Third-party codes are subject to their respective licenses.
+The code and the models are available for non-commercial scientific research purposes as defined in the [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). By downloading and using this code you agree to the terms in the [LICENSE](LICENSE). Third-party codes are subject to their respective licenses.
 
-By downloading and using this repo, you agree on these terms and conditions.
+By downloading and using this repo, you agree to these terms and conditions.
 
 ## Acknowledgement
 This work has received funding from the European Union
