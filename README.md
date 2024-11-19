@@ -43,7 +43,9 @@ from PIL import Image
 from mmengine.config import Config
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-configs = Config.fromfile('./tests/config_surgvlp.py')['config'] # config_surgvlp.py / config_hecvl.py / config_peskavlp.py
+configs = Config.fromfile('./tests/config_surgvlp.py')['config']
+# Change the config file to load different models: config_surgvlp.py / config_hecvl.py / config_peskavlp.py
+
 model, preprocess = surgvlp.load(configs.model_config, device=device)
 
 image = preprocess(Image.open("./tests/SurgVLP.png")).unsqueeze(0).to(device)
