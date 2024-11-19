@@ -24,13 +24,16 @@ import zipfile
 
 __all__ = ["available_models", "load", "tokenize", "load_dataset"]
 
-
 _MODELS = {
     "SurgVLP": "https://seafile.unistra.fr/f/93757ace1bfc47248e1e/?dl=1",
+    "HecVL": "https://seafile.unistra.fr/f/3b9b9207068a4b03bc2a/?dl=1",
+    "PeskaVLP": "https://seafile.unistra.fr/f/65a2b1bf113e428280d0/?dl=1",
 } 
 
 _INPUT_RES = {
     "SurgVLP": 224,
+    "HecVL": 224,
+    "PeskaVLP": 224
 } 
 
 def available_models() -> List[str]:
