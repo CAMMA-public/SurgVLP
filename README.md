@@ -1,3 +1,5 @@
+## **This repository provides the Surgical Vision-Language Pretraining Model (SurgVLP) and its variants: SurgVLP [1], HecVL [2], and PeskaVLP [3]. For the pretraining code, please wait for our update of the new codebase.**
+
 <div align="center">
 <a href="http://camma.u-strasbg.fr/">
 <img src="tests/camma_logo.png" width="30%">
@@ -130,8 +132,13 @@ $ cd tests
 $ python zero_shot.py --save_plot=False --class_prompt=./class_prompt.txt --config --config=./config.py --batch_size=400
 ```
 
-## Citing SurgVLP   
-Please cite this work if you find it interesting and useful:
+## References
+[1] [Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures](https://arxiv.org/abs/2307.15220)          
+[2] [HecVL: Hierarchical Video-Language Pretraining for Zero-shot Surgical Phase Recognition](https://arxiv.org/abs/2405.10075)       
+Presented at MICCAI 2024           
+[3] [Procedure-Aware Surgical Video-language Pretraining with Hierarchical Knowledge Augmentation](https://arxiv.org/abs/2410.00263)           
+Presented at NeurIPS 2024               
+Bibtex:
 ```bibtex
 @article{yuan2023learning,
   title={Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures},
@@ -140,8 +147,22 @@ Please cite this work if you find it interesting and useful:
   eprint={2307.15220},
   archivePrefix={arXiv}
 }
+
+@inproceedings{yuan2024hecvl,
+  title={HecVL: hierarchical video-language pretraining for zero-shot surgical phase recognition},
+  author={Yuan, Kun and Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas},
+  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+  pages={306--316},
+  year={2024},
+  organization={Springer}
+}
+
+@inproceedings{srivastavprocedure,
+  title={Procedure-Aware Surgical Video-language Pretraining with Hierarchical Knowledge Augmentation},
+  author={Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas and others},
+  booktitle={The Thirty-eighth Annual Conference on Neural Information Processing Systems}
+}
 ```
-[[`Download PDF`](https://arxiv.org/pdf/2307.15220.pdf)]
 
 
 ## License
