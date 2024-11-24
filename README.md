@@ -159,10 +159,11 @@ Bibtex:
   organization={Springer}
 }
 
-@inproceedings{srivastavprocedure,
+@article{yuan2024procedure,
   title={Procedure-Aware Surgical Video-language Pretraining with Hierarchical Knowledge Augmentation},
-  author={Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas and others},
-  booktitle={The Thirty-eighth Annual Conference on Neural Information Processing Systems}
+  author={Yuan, Kun and Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas},
+  journal={arXiv preprint arXiv:2410.00263},
+  year={2024}
 }
 ```
 
