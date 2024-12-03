@@ -24,7 +24,7 @@ config = dict(
     ) for i in range(49, 81)
     ],
     model_config = dict(
-        type='HecVL',
+        type='SurgVLP',
         backbone_img = dict(
             type='img_backbones/ImageEncoder',
             num_classes=768,
