@@ -97,7 +97,7 @@ The model returned by `surgvlp.load()` supports the following methods:
 
 Given a batch of images, returns the image features encoded by the vision portion of the SurgVLP model.
 
-#### `model(image: None, text: Tensor, mode='text)`
+#### `model(image: None, text: Tensor, mode='text')`
 
 Given a batch of text tokens, returns the text features encoded by the language portion of the SurgVLP model.
 
