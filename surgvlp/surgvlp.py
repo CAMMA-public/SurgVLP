@@ -133,10 +133,13 @@ def _download(models: Dict[str, str], key: str, root: str) -> str:
     
     return download_target.replace('.zip', '.pth')
 
-def load(model_config, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", download_root: str = None):
+def load(model_config, device: Union[str, torch.device] = "cuda" if torch.cuda.is_available() else "cpu", download_root: str = None, pretrain: str=None):
         
     model_name = model_config['type']
-    model_path = _download(_MODELS, model_name, download_root or os.path.expanduser("~/.cache/surgvlp"))
+    if pretrain is not None:
+        model_path = pretrain
+    else:
+        model_path = _download(_MODELS, model_name, download_root or os.path.expanduser("~/.cache/surgvlp"))
 
     input_size = _INPUT_RES[model_name]
 
