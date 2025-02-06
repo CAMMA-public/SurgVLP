@@ -35,7 +35,34 @@ First, create a anaconda environment and [install PyTorch](https://pytorch.org/g
 $ pip install git+https://github.com/openai/CLIP.git
 $ pip install git+https://github.com/CAMMA-public/SurgVLP.git
 ```
+### Online Load Model (Automatically download weights)
+```python
+import torch
+import surgvlp
+from mmengine.config import Config
+device = "cuda" if torch.cuda.is_available() else "cpu"
+configs = Config.fromfile('./tests/config_surgvlp.py')['config']
+model, preprocess = surgvlp.load(configs.model_config, device=device)
+```
+You can also change the config file to load different models: 
+ - SurgVLP [1]: config_surgvlp.py
+ - HecVL [2]: config_hecvl.py
+ - PeskaVLP [3]: config_peskavlp.py
 
+
+### Offline Load Model (Manually download and load weights)
+First download the weights from:
+ - SurgVLP [1]: https://seafile.unistra.fr/f/93757ace1bfc47248e1e/?dl=1
+ - HecVL [2]: https://seafile.unistra.fr/f/3b9b9207068a4b03bc2a/?dl=1
+ - PeskaVLP [3]: https://seafile.unistra.fr/f/65a2b1bf113e428280d0/?dl=1
+     
+Then use the following code to load the model and weights:
+```python
+model, preprocess = surgvlp.load(configs.model_config, device=device, pretrain='./your_path_to_model_weights.pth')
+```
+
+
+### Perform Zero-shot classification
 ```python
 import torch
 import surgvlp
