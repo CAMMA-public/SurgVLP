@@ -1,4 +1,4 @@
-## **This repository provides the Surgical Vision-Language Pretraining Model (SurgVLP) and its variants: SurgVLP [1], HecVL [2], and PeskaVLP [3]. For the pretraining code, please wait for our update of the new codebase.**
+## **This repository provides the Surgical Vision-Language Pretraining Model (SurgVLP) and its variants: SurgVLP [1], HecVL [2], and PeskaVLP [3]. For the pretraining code, please refer to peskavlp [codebase](https://github.com/CAMMA-public/PeskaVLP).**
 
 <div align="center">
 <a href="http://camma.u-strasbg.fr/">
