@@ -18,6 +18,42 @@ SurgVLP (Surgical Vision Language Pre-training) is a neural network pretrained o
 - Evaluation code for zero-shot recognition on surgical phases on the Cholec-80 dataset.
 
 
+## References
+[1] [Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures](https://arxiv.org/abs/2307.15220)          
+[2] [HecVL: Hierarchical Video-Language Pretraining for Zero-shot Surgical Phase Recognition](https://arxiv.org/abs/2405.10075)       
+Presented at MICCAI 2024           
+[3] [Procedure-Aware Surgical Video-language Pretraining with Hierarchical Knowledge Augmentation](https://arxiv.org/abs/2410.00263)           
+Presented at NeurIPS 2024               
+Bibtex:
+```bibtex
+@article{yuan2023learning,
+  title={Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures},
+  author={Yuan, Kun and Srivastav, Vinkle and Yu, Tong and Lavanchy, Joel and Mascagni, Pietro and Navab, Nassir and Padoy, Nicolas},
+  year={2023},
+  eprint={2307.15220},
+  archivePrefix={arXiv}
+}
+
+@inproceedings{yuan2024hecvl,
+  title={HecVL: hierarchical video-language pretraining for zero-shot surgical phase recognition},
+  author={Yuan, Kun and Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas},
+  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+  pages={306--316},
+  year={2024},
+  organization={Springer}
+}
+
+@article{yuan2024procedure,
+  title={Procedure-aware surgical video-language pretraining with hierarchical knowledge augmentation},
+  author={Yuan, Kun and Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas},
+  journal={Advances in Neural Information Processing Systems},
+  volume={37},
+  pages={122952--122983},
+  year={2024}
+}
+
+```
+
 
 ## Surgical Vision-Language Pretraining Dataset (SVL)
 
@@ -159,39 +195,6 @@ Run the **tests/zero_shot.py** to conduct zero-shot surgical phase recognition o
 ```bash
 $ cd tests
 $ python zero_shot.py --save_plot=False --class_prompt=./class_prompt.txt --config --config=./config.py --batch_size=400
-```
-
-## References
-[1] [Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures](https://arxiv.org/abs/2307.15220)          
-[2] [HecVL: Hierarchical Video-Language Pretraining for Zero-shot Surgical Phase Recognition](https://arxiv.org/abs/2405.10075)       
-Presented at MICCAI 2024           
-[3] [Procedure-Aware Surgical Video-language Pretraining with Hierarchical Knowledge Augmentation](https://arxiv.org/abs/2410.00263)           
-Presented at NeurIPS 2024               
-Bibtex:
-```bibtex
-@article{yuan2023learning,
-  title={Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures},
-  author={Yuan, Kun and Srivastav, Vinkle and Yu, Tong and Lavanchy, Joel and Mascagni, Pietro and Navab, Nassir and Padoy, Nicolas},
-  year={2023},
-  eprint={2307.15220},
-  archivePrefix={arXiv}
-}
-
-@inproceedings{yuan2024hecvl,
-  title={HecVL: hierarchical video-language pretraining for zero-shot surgical phase recognition},
-  author={Yuan, Kun and Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas},
-  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
-  pages={306--316},
-  year={2024},
-  organization={Springer}
-}
-
-@article{yuan2024procedure,
-  title={Procedure-Aware Surgical Video-language Pretraining with Hierarchical Knowledge Augmentation},
-  author={Yuan, Kun and Srivastav, Vinkle and Navab, Nassir and Padoy, Nicolas},
-  journal={arXiv preprint arXiv:2410.00263},
-  year={2024}
-}
 ```
 
 
