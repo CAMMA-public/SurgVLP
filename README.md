@@ -7,7 +7,7 @@
 </div>
 
 # **Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures (SurgVLP)**
-_Kun Yuan, Vinkle Srivastav, Tong Yu, Joel L. Lavanchy, Pietro Mascagni, Nassir Navab, Nicolas Padoy_
+_Kun Yuan, [Vinkle Srivastav](https://vinkle.github.io/), Tong Yu, Joel L. Lavanchy, Pietro Mascagni, Nassir Navab, Nicolas Padoy_
 
 [![arXiv](https://img.shields.io/badge/arxiv-2307.15220-red)](https://arxiv.org/abs/2307.15220) 
 
