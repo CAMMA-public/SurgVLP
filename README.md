@@ -1,4 +1,4 @@
-## **This repository provides the Surgical Vision-Language Pretraining Model (SurgVLP) and its variants: SurgVLP [1], HecVL [2], and PeskaVLP [3]. For the pretraining code, please refer to peskavlp [codebase](https://github.com/CAMMA-public/PeskaVLP).**
+## **This repository provides the Surgical Vision-Language Pretraining Model (SurgVLP) and its variants: SurgVLP [1] (2023), HecVL [2] (2024), and PeskaVLP [3] (2024). For the pretraining code, please refer to peskavlp [codebase](https://github.com/CAMMA-public/PeskaVLP). We recommend you to use the best version, PeskaVLP for your study.**
 
 <div align="center">
 <a href="http://camma.u-strasbg.fr/">
@@ -6,7 +6,7 @@
 </a>
 </div>
 
-# **Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures (SurgVLP)**
+# **[Medical Image Analysis 2025] Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures (SurgVLP)**
 _Kun Yuan, [Vinkle Srivastav](https://vinkle.github.io/), Tong Yu, Joel L. Lavanchy, Pietro Mascagni, Nassir Navab, Nicolas Padoy_
 
 [![arXiv](https://img.shields.io/badge/arxiv-2307.15220-red)](https://arxiv.org/abs/2307.15220) 
@@ -26,12 +26,13 @@ Presented at MICCAI 2024
 Presented at NeurIPS 2024               
 Bibtex:
 ```bibtex
-@article{yuan2023learning,
-  title={Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures},
-  author={Yuan, Kun and Srivastav, Vinkle and Yu, Tong and Lavanchy, Joel and Mascagni, Pietro and Navab, Nassir and Padoy, Nicolas},
-  year={2023},
-  eprint={2307.15220},
-  archivePrefix={arXiv}
+@article{yuan2025learning,
+  title={Learning multi-modal representations by watching hundreds of surgical video lectures},
+  author={Yuan, Kun and Srivastav, Vinkle and Yu, Tong and Lavanchy, Joel L and Marescaux, Jacques and Mascagni, Pietro and Navab, Nassir and Padoy, Nicolas},
+  journal={Medical Image Analysis},
+  pages={103644},
+  year={2025},
+  publisher={Elsevier}
 }
 
 @inproceedings{yuan2024hecvl,
