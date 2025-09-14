@@ -20,6 +20,7 @@ SurgVLP (Surgical Vision Language Pre-training) is a neural network pretrained o
 
 ## References
 [1] [Learning Multi-modal Representations by Watching Hundreds of Surgical Video Lectures](https://arxiv.org/abs/2307.15220)          
+Published in MedIA 2025    
 [2] [HecVL: Hierarchical Video-Language Pretraining for Zero-shot Surgical Phase Recognition](https://arxiv.org/abs/2405.10075)       
 Presented at MICCAI 2024           
 [3] [Procedure-Aware Surgical Video-language Pretraining with Hierarchical Knowledge Augmentation](https://arxiv.org/abs/2410.00263)           
